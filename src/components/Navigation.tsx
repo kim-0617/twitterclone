@@ -19,7 +19,9 @@ function Navigation() {
           <Link to="/profile">
             <CgProfile className="profile__icon" />
           </Link>
-          <Link to="/profile">Profile</Link>
+          <Link to="/profile">{`${
+            userObj.displayName || userObj.email
+          }'s Profile`}</Link>
         </li>
       </ul>
     </nav>

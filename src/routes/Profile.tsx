@@ -7,7 +7,7 @@ function Profile() {
   const navigate = useNavigate();
   const { userObj, refreshUser }: any = useContext(UserContext);
   const [newDisplayName, setNewDisplayName] = useState<string>(
-    userObj.displayName
+    userObj.displayName || userObj.email
   );
 
   const onLogOutClick = () => {
