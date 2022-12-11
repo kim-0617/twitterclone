@@ -2,7 +2,8 @@ import { read } from "fs";
 import React, { useState, useEffect, useContext } from "react";
 import Cweet from "../components/Cweet";
 import { UserContext } from "../context/UserContext";
-import { dbService } from "../fbase";
+import { dbService, storageService } from "../fbase";
+import { v4 as uuidv4 } from "uuid";
 
 interface CweetData {
   id?: string;
@@ -35,12 +36,29 @@ function Home() {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await dbService.collection("cweets").add({
-      text: cweet,
-      createdAt: Date.now(),
-      author: userObj._delegate.uid,
-    });
-    setCweet("");
+
+    try {
+      let fileURL = "";
+      if (fileString !== "") {
+        const fileRef = storageService
+          .ref()
+          .child(`${userObj.uid}/${uuidv4()}`);
+        const response = await fileRef.putString(fileString, "data_url");
+        fileURL = await response.ref.getDownloadURL();
+      }
+      const cweetObj = {
+        text: cweet,
+        createdAt: Date.now(),
+        author: userObj._delegate.uid,
+        fileURL,
+      };
+
+      await dbService.collection("cweets").add(cweetObj);
+      setCweet("");
+      setFileString("");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onChange = (e: React.FormEvent<HTMLInputElement>) => {

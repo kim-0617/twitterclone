@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { dbService } from "../fbase";
+import { dbService, storageService } from "../fbase";
 
 function Cweet({ cweet, isOwner }: any) {
   const [editing, setEditing] = useState(false);
@@ -10,6 +10,7 @@ function Cweet({ cweet, isOwner }: any) {
     if (ok) {
       // delete
       await dbService.doc(`cweets/${cweet.id}`).delete();
+      await storageService.refFromURL(cweet.fileURL).delete();
     }
   };
 
@@ -48,8 +49,15 @@ function Cweet({ cweet, isOwner }: any) {
       ) : (
         <>
           <h4>{cweet.text}</h4>
-          {isOwner && <button onClick={onDeleteClick}>Delete Cweet</button>}
-          {isOwner && <button onClick={toggleEditing}>Edit Cweet</button>}
+          {cweet.fileURL && (
+            <img width={50} height={50} src={cweet.fileURL} alt="cweet" />
+          )}
+          {isOwner && (
+            <>
+              <button onClick={onDeleteClick}>Delete Cweet</button>
+              <button onClick={toggleEditing}>Edit Cweet</button>
+            </>
+          )}
         </>
       )}
     </div>
