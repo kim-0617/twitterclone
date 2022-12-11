@@ -46,16 +46,20 @@ function Profile() {
 
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="profile__form">
         <input
           value={newDisplayName}
           onChange={onChange}
           type="text"
           placeholder="Display name"
         />
-        <input type="submit" value="Update Profile" />
+        <button type="submit" className="update__profile">
+          Update Profile
+        </button>
+        <button type="button" className="logout" onClick={onLogOutClick}>
+          Log Out
+        </button>
       </form>
-      <button onClick={onLogOutClick}>Log Out</button>
     </>
   );
 }

@@ -4,6 +4,8 @@ import Cweet from "../components/Cweet";
 import { UserContext } from "../context/UserContext";
 import { dbService, storageService } from "../fbase";
 import { v4 as uuidv4 } from "uuid";
+import { BiMessageSquareAdd } from "react-icons/bi";
+import { BsFillArrowRightCircleFill } from "react-icons/bs";
 
 interface CweetData {
   id?: string;
@@ -49,7 +51,7 @@ function Home() {
       const cweetObj = {
         text: cweet,
         createdAt: Date.now(),
-        author: userObj._delegate.uid,
+        author: userObj.uid,
         fileURL,
       };
 
@@ -82,24 +84,42 @@ function Home() {
   const onClearPhoto = () => setFileString("");
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
+    <div className="home__wrap">
+      <form onSubmit={onSubmit} className="home__form">
         <input
           name="cweet"
           value={cweet}
           onChange={onChange}
           type="text"
-          placeholder="what's on yout mind?"
+          placeholder="what's on your mind?"
           maxLength={120}
         />
-        <input type="file" accept="image/*" onChange={onFileChange} />
+        <label htmlFor="fileInput" className="plus__icon__wrap">
+          Add photos
+          <BiMessageSquareAdd className="plus__icon" />
+        </label>
+        <input
+          id="fileInput"
+          type="file"
+          accept="image/*"
+          onChange={onFileChange}
+          style={{ display: "none" }}
+        />
         {fileString && (
           <div>
             <img src={fileString} alt="imgPreview" width="50px" height="50px" />
             <button onClick={onClearPhoto}>Clear Photo</button>
           </div>
         )}
-        <input type="submit" value="Cweet" />
+        <label htmlFor="submit__cweet" className="arrow__icon__wrap">
+          <BsFillArrowRightCircleFill className="arrow__icon" />
+        </label>
+        <input
+          type="submit"
+          value="Cweet"
+          id="submit__cweet"
+          style={{ display: "none" }}
+        />
       </form>
 
       <div>

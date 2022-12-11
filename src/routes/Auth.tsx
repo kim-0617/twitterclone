@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import { firebaseInstance, authService } from "../fbase";
-
-declare namespace JSX {
-  interface IntrinsicElements {
-    span: any;
-  }
-}
+import { BsTwitter } from "react-icons/bs";
+import { AiOutlineGooglePlus, AiFillGithub } from "react-icons/ai";
 
 function Auth() {
   const [email, setEmail] = useState("");
@@ -64,7 +60,8 @@ function Auth() {
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="login__form">
+        <BsTwitter className="twitter__icon" />
         <input
           name="email"
           type="email"
@@ -84,18 +81,33 @@ function Auth() {
         <input
           type="submit"
           value={newAccount ? "Create Account" : "Sign In"}
+          className="sign__in"
         />
-        {error}
-        <div>
-          <button type="button" onClick={onSocialClick} name="google">
+        <span className="error">{error}</span>
+        <span onClick={toggleAccount} className="toggle__account">
+          {newAccount ? "Sign In" : "Create Account"}
+        </span>
+        <div className="socail__wrap">
+          <button
+            type="button"
+            onClick={onSocialClick}
+            name="google"
+            className="google"
+          >
             Continue with Google
+            <AiOutlineGooglePlus className="google__icon" />
           </button>
-          <button type="button" onClick={onSocialClick} name="github">
+          <button
+            type="button"
+            onClick={onSocialClick}
+            name="github"
+            className="github"
+          >
             Continue with Github
+            <AiFillGithub className="github__icon" />
           </button>
         </div>
       </form>
-      <b onClick={toggleAccount}>{newAccount ? "Sign In" : "Create Account"}</b>
     </div>
   );
 }

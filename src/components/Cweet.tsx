@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { dbService, storageService } from "../fbase";
+import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 
 function Cweet({ cweet, isOwner }: any) {
   const [editing, setEditing] = useState(false);
@@ -31,10 +32,10 @@ function Cweet({ cweet, isOwner }: any) {
   const toggleEditing = () => setEditing((prev) => !prev);
 
   return (
-    <div>
+    <div className="cweet">
       {editing ? (
         <>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={onSubmit} className="edit__form">
             <input
               placeholder="Edit your Cweet"
               onChange={onChange}
@@ -42,9 +43,13 @@ function Cweet({ cweet, isOwner }: any) {
               value={newCweet}
               required
             />
-            <input type="submit" value="Edit" />
+            <button type="submit" className="edit">
+              Edit
+            </button>
           </form>
-          <button onClick={toggleEditing}>Cancel</button>
+          <button className="cancel" onClick={toggleEditing}>
+            Cancel
+          </button>
         </>
       ) : (
         <>
@@ -53,10 +58,14 @@ function Cweet({ cweet, isOwner }: any) {
             <img width={50} height={50} src={cweet.fileURL} alt="cweet" />
           )}
           {isOwner && (
-            <>
-              <button onClick={onDeleteClick}>Delete Cweet</button>
-              <button onClick={toggleEditing}>Edit Cweet</button>
-            </>
+            <div className="edit__wrap">
+              <button onClick={onDeleteClick}>
+                <AiFillDelete className="delete__icon" />
+              </button>
+              <button onClick={toggleEditing}>
+                <AiFillEdit className="update__icon" />
+              </button>
+            </div>
           )}
         </>
       )}
