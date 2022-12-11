@@ -33,7 +33,6 @@ function Auth() {
         // Sign In
         data = await authService.signInWithEmailAndPassword(email, password);
       }
-      console.log(data);
     } catch (error: any) {
       console.log(error.code);
       setError(error.code.replace("auth/", ""));
@@ -46,7 +45,7 @@ function Auth() {
 
   const onSocialClick = async (e: React.MouseEvent<HTMLElement>) => {
     const target = e.target as HTMLInputElement;
-    const { name, value } = target;
+    const { name } = target;
 
     let provider: any;
     if (name === "google") {
@@ -54,8 +53,7 @@ function Auth() {
     } else if (name === "github") {
       provider = new firebaseInstance.auth.GithubAuthProvider();
     }
-    const data = await authService.signInWithPopup(provider);
-    console.log(data);
+    await authService.signInWithPopup(provider);
   };
 
   return (
