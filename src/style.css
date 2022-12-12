@@ -274,7 +274,7 @@ nav ul li a {
 
 .home__form input {
   width: 320px;
-  padding: 10px 20px;
+  padding: 10px 50px 10px 20px;
   border-radius: 20px;
   outline: none;
   border: 1px solid #04aaff;
@@ -310,7 +310,7 @@ nav ul li a {
 }
 
 .cweet {
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   background-color: #fff;
   width: 320px;
   padding: 23px 25px 20px 20px;
@@ -415,4 +415,44 @@ nav ul li a {
   position: absolute;
   left: 0;
   bottom: -25px;
+}
+
+.cweet__img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  right: -20px;
+  bottom: -30px;
+}
+
+.cweet:last-child {
+  margin-bottom: 100px;
+}
+
+.preview__wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.img__preview {
+  width: 70px;
+  height: 70px;
+  display: block;
+  border-radius: 50%;
+}
+
+.clear__photo {
+  border: 1px solid #000;
+  padding: 5px 10px;
+  display: inline-block;
+  border-radius: 20px;
+  background-color: #04aaff;
+  color: #fff;
+  justify-self: center;
+  margin: 20px 0;
+  cursor: pointer;
 }

@@ -55,7 +55,13 @@ function Cweet({ cweet, isOwner }: any) {
         <>
           <h4>{cweet.text}</h4>
           {cweet.fileURL && (
-            <img width={50} height={50} src={cweet.fileURL} alt="cweet" />
+            <img
+              width={50}
+              height={50}
+              src={cweet.fileURL}
+              alt="cweet"
+              className="cweet__img"
+            />
           )}
           {isOwner && (
             <div className="edit__wrap">

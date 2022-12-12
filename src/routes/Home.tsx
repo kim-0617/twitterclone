@@ -24,7 +24,7 @@ function Home() {
   useEffect(() => {
     const unsubscribe = dbService
       .collection("cweets")
-      .orderBy("createdAt", "asc")
+      .orderBy("createdAt", "desc")
       .onSnapshot((snapshot) => {
         const cweetArray = snapshot.docs.map((doc) => ({
           id: doc.id,
@@ -106,9 +106,11 @@ function Home() {
           style={{ display: "none" }}
         />
         {fileString && (
-          <div>
-            <img src={fileString} alt="imgPreview" width="50px" height="50px" />
-            <button onClick={onClearPhoto}>Clear Photo</button>
+          <div className="preview__wrap">
+            <img src={fileString} alt="imgPreview" className="img__preview" />
+            <button className="clear__photo" onClick={onClearPhoto}>
+              Clear Photo
+            </button>
           </div>
         )}
         <label htmlFor="submit__cweet" className="arrow__icon__wrap">
